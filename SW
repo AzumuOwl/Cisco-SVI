@@ -1,1 +1,21 @@
+conf t
 
+vlan 10
+ name V10
+
+interface vlan 10
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+
+ip dhcp excluded-address 192.168.10.1 192.168.10.10
+
+ip dhcp pool VLAN10-POOL
+ network 192.168.10.0 255.255.255.0
+ default-router 192.168.10.1
+ dns-server 8.8.8.8
+
+interface e0/1
+ switchport mode access
+ switchport access vlan 10
+
+end
